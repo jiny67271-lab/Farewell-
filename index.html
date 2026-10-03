@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>A Letter For Dear Hayat</title>
+<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+<style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background-color: #f5f5f5;
+      color: #2c3e50;
+      margin: 0;
+      padding: 20px;
+      background-image: url("https://www.transparenttextures.com/patterns/aged-paper.png");
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .sealed-letter {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #e8b4b8 0%, #d49ba0 100%);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: transform .3s ease, box-shadow .3s ease;
+      text-align: center;
+      user-select: none;
+      box-shadow: 2px 4px 14px rgba(0,0,0,.3);
+      padding: 10px;
+      line-height: 1.3;
+    }
+
+    .sealed-letter:hover {
+      transform: scale(1.08);
+      box-shadow: 4px 7px 20px rgba(0,0,0,.35);
+    }
+
+    .sealed-letter::before {
+      content: "💌";
+      font-size: 2.2em;
+      margin-bottom: 7px;
+    }
+
+    .swiper-container {
+      max-width: 800px;
+      width: 100%;
+      border: 2px solid #d49ba0;
+      border-radius: 8px;
+      background-color: #faf8f5;
+      box-shadow: 0 0 25px rgba(0,0,0,.45);
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(.1) rotate(45deg);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 1s ease, opacity 1s ease, visibility 0s linear 1s;
+      overflow: hidden;
+    }
+
+    .swiper-container.open {
+      transform: translate(-50%, -50%) scale(1) rotate(0);
+      opacity: 1;
+      visibility: visible;
+      transition: transform 1s ease, opacity 1s ease;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      background-color: #d49ba0;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.1em;
+      cursor: pointer;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform .3s ease;
+    }
+
+    .close-btn:hover { transform: scale(1.1); }
+
+    .swiper-slide {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 55px 30px 55px;
+      text-align: center;
+      min-height: 80vh;
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+
+    h1, h2 {
+      color: #8b5a5e;
+      margin: 0 0 15px;
+      font-weight: normal;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      letter-spacing: 2px;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      border-bottom: 1px solid #e8b4b8;
+      padding-bottom: 10px;
+    }
+
+    .letter-page {
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 22px 25px;
+      border: 1px solid #e8d4d6;
+      background-color: #faf8f5;
+      font-size: 1.08em;
+      line-height: 1.55em;
+      white-space: pre-line;
+      border-radius: 3px;
+      color: #333;
+      text-align: left;
+      user-select: text;
+      box-shadow: inset 0 0 12px rgba(139,90,94,.04);
+    }
+
+    .quote { max-width: 650px; margin: 18px auto; padding: 18px 20px; border-left: 3px solid #d49ba0; background: #fffafa; font-style: italic; line-height: 1.8em; text-align: center; color: #555; }
+
+    .empty-page {
+      color: #888;
+      font-style: italic;
+      margin-top: 40px;
+    }
+
+    .swiper-pagination {
+      bottom: 10px !important;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 12px; }
+
+      .swiper-container {
+        width: calc(100% - 24px);
+        max-height: 94vh;
+      }
+
+      .swiper-slide {
+        min-height: 82vh;
+        max-height: 94vh;
+        padding: 52px 16px 50px;
+      }
+
+      h1 { font-size: 1.45em; }
+      h2 { font-size: 1.25em; }
+
+      .letter-page {
+        padding: 18px 17px;
+        font-size: .98em;
+        line-height: 1.5em;
+      }
+
+      .quote { padding: 15px; font-size: .95em; }
+
+      .close-btn {
+        top: 9px;
+        right: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="sealed-letter" id="sealedLetter">
+<span>Tap to Read</span>
+<span>My Letter</span>
+</div>
+<div class="swiper-container" id="swiperContainer">
+<button aria-label="Close letter" class="close-btn" id="closeBtn">✕</button>
+<div class="swiper-wrapper">
+<div aria-label="Page 1" class="swiper-slide"><h2>The beginning of new age</h2><div class="letter-page">So how do u liked me surpises and i hope this 1/10/2026 will be a unforgettable day for U. 🎂✨
+
+And allah may bless you with endless happiness and love. 🤲❤️
+
+Well now the birthday is almost over and i want to present a small story for my dearest and beautiful your highness. 📖👑</div></div><div class="swiper-slide"><h2>Page 2</h2>Ek ladka jo usually apne phone par scroll karta rehta tha. Ek din Instagram dekhte waqt usse ek notification aayi. 🔔<br/>Usne socha koi random notification hogi, bas red dot clear karne ke liye usne check kiya.<br/><br/>Lekin wahan kisi ne uske comment ka reply kiya tha:<br/><br/>“I want to talk to u.” 💬<br/><br/>Saath mein ek follow request bhi thi.<br/><br/>Ladke ke liye aisa response milna naya tha, isliye usne request accept kar li aur message kiya:<br/><br/>“Hii.” 🙂<br/><br/>Lekin us waqt usse koi response nahi mila, toh usne socha ki shayad iske baare mein zyada bother nahi karna chahiye.</div><div class="swiper-slide"><h2>Page 3</h2>Agale din usi person ka uski story par message aaya. Ladke ne reply kiya: 💬<br/><br/>“Hii.”<br/><br/>Aur wahin se unki conversation shuru hui.<br/><br/>Ladki ne poocha:<br/><br/>“Who r u?” 🤔<br/><br/>Ladka sochne laga, “What do you mean? Tum hi toh ho jisne mujhse baat karne ke liye request bheji thi, aur ab tum hi pooch rahi ho ki main kaun hoon?”<br/><br/>Phir ladke ne use yaad dilaya ki usne uske comment ka reply karte hue “I want to talk to u” kaha tha aur follow request bhi bheji thi.<br/><br/>Tab usse yaad aaya. 💭</div><div class="swiper-slide"><h2>Page 4</h2>Uske baad unki conversation kaafi smoothly chalne lagi, jaise woh dono pehle se kai baar baat kar chuke hon. ✨<br/><br/>Dheere-dheere unhone ek-doosre ke baare mein kaafi kuch jaana — naam, city, country, favourite food, favourite songs aur bhi bahut si chhoti-chhoti cheezein. 🫶🎶<br/><br/>Ladki ne apni tragic love story bhi dheere-dheere share karni shuru ki. 🥀 Usse trust issues the. Shuru mein usse ladke par bhi doubt tha ki kahin woh koi fraud toh nahi, ya koi aisa person toh nahi jo use jaanta ho aur uske saath prank kar raha ho.</div><div class="swiper-slide"><h2>Page 5</h2>Lekin lagbhag ek mahine baad ladke ko uske trust issues ki asli wajah samajh aayi. 💭 Tab usse realize hua ki uska trust karne mein struggle karna genuine tha.<br/><br/>Aur recently uski life mein ek little brother bhi aa gaya — another mother se — aur uske neighbour ne usse confess bhi kar diya. Thoda funny tha, thoda unexpected. 😄✨<br/><br/>Ladka bhi apni kuch stories uske saath share karta raha. 🤝<br/><br/>Pehle month mein unki late-night conversations hoti thi. 🌙💬 Lekin Ramadan shuru hone ke baad ladki busy ho gayi aur unki conversations kaafi kam ho gayi.<br/><br/>Well, woh dono sirf online friends the, aur har kisi ki apni life hoti hai.<br/><br/>Ab unki koi conversation nahi hoti. 🥀<br/><br/>Lekin ladke ke liye woh ek achhi ladki aur ek achhi person thi, aur woh aaj bhi uske liye achha hi wish karta hai. ❤️</div><div class="swiper-slide"><h2>Page 6</h2>Is story ki beauty shayad ye thi ki do completely different log — opposite gender, different nations aur different religions se hone ke bawajood — ek short but beautiful friendship bana paaye. 🌍🤝<br/><br/>Ye story sach thi ya nahi, ye sirf reader aur writer jaante hain. 📖<br/><br/>Aur ye friendship bhi kaafi secret thi. 🤫 Ladke ki side se toh kisi ko iske baare mein pata nahi tha. Ladki ki side se kisi ko pata tha ya nahi, ye ladka nahi jaanta.<br/><br/>Agar is poori story ko short mein kehna ho, toh shayad ye kaha ja sakta hai: 💭<br/><br/>Woh dono universe ki marzi se mile the, ek purpose ke liye. 🌌✨ Aur shayad woh purpose bahut pehle hi khatam ho chuka tha. 🥀</div><div class="swiper-slide"><h2>Page 7</h2>Aur ek baat jo main bhool gaya tha— 💭<br/><br/>Unki very first conversation mein ladke ne usse poocha tha ki woh usse baat kyun karna chahti thi. 🤔<br/><br/>Usne kaha tha ki woh apne heartbreak ki wajah se disturbed thi, aur ladke ka comment padhkar usse thoda relief mila tha.<br/><br/>Shayad woh dono isi wajah se mile the. ❤️‍🩹<br/><br/>Ek-doosre ki life mein permanently rehne ke liye nahi, balki kuch waqt ke liye ek doosre ka tension kam karne ke liye.<br/><br/>Kuch aisi baatein share karne ke liye jo kabhi-kabhi hum apne close ones se bhi nahi keh paate.<br/><br/>Aur ladke ko aaj bhi uski favourite shayari yaad hai:<br/><br/>“Geyron ki batein sun kar chor rhe ho muje<br/>Woh gheyr bhi tumare apne na nikle to kia<br/>karo ge”</div><div class="swiper-slide"><h2>Page 8</h2>Aur is story ke liye ladke ke paas bhi do shayari hain: 🥀<br/><br/>“Ittefaaq se milne wale<br/>Marzi se bhichad jaate hai”<br/><br/>Aur—<br/><br/>“Tumhe kya lagta hai ki Mujhe<br/>mera ajaan malum nahi tha<br/>Iss kahani ne cheekh cheekh kar bataya tha<br/>Ki iss kahani ko khatam hona hai”<br/><br/>Dono shayaris is story ke saath perfectly match karti hain.<br/><br/>Kyunki kuch kahaniyan kisi grand ending ke liye nahi hoti.<br/><br/>Kuch kahaniyan bas isliye hoti hain ki do strangers ek particular waqt par ek doosre se milen, apna thoda sa dard share karein, ek-doosre ko samjhein, kuch achhi memories banayein… 🫶<br/><br/>Aur phir apni-apni zindagi mein aage badh jaayein.</div><div class="swiper-slide"><h2>Page 9</h2>Shayad unki kahani ka purpose ek doosre ki zindagi mein hamesha rehna nahi tha.<br/><br/>Shayad purpose sirf itna tha ki jab dono ko kisi se baat karne ki zarurat thi, tab woh ek-doosre se mil gaye. ❤️‍🩹<br/><br/>Aur jab woh purpose khatam ho gaya…<br/><br/>toh kahani bhi khatam ho gayi. 🥀</div><div aria-label="Page 15" class="swiper-slide"><h2>Page 10: Thank You</h2>Thank you... 🥹❤️<br/><br/>For being my temporary amazing friend.<br/>I'm glad for listening to your story.<br/>For thinking highly of me.<br/><br/>For those late night talks, 🌙<br/>For trusting me with your problems, 🤝<br/>For every meme you sent that made me laugh, 😂<br/>For every memory we've made together. 🫶<br/><br/>I don't know what I did to deserve a friend like you,<br/>But I'm so glad that we met even for a little while. 🙏❤️</div><div class="swiper-slide"><h2>Page 11: Goodbye</h2>I hope tumhe koi aisa mil jaaye jo tumhe mujhse bhi zyada special feel karaye. ❤️‍🩹<br/><br/>Kyuki mujhe nahi lagta ki main ye continue kar paunga… 🥀<br/><br/>Lekin agar kabhi tumhare dimaag mein bahut saare thoughts aur unanswered questions chalne lage, jo tum kisi se share na kar sako… 💭<br/><br/>toh bas mujhe dhoond lena.<br/><br/>Main yahin rahunga, meri dearest Butki aur ex-best friend ke liye. 🫂❤️<br/><br/>Goodbye… 🥀<br/><br/>— Your Butka 🖤</div></div>
+<div class="swiper-pagination"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const sealedLetter = document.getElementById("sealedLetter");
+    const swiperContainer = document.getElementById("swiperContainer");
+    const closeBtn = document.getElementById("closeBtn");
+    let swiper = null;
+
+    sealedLetter.addEventListener("click", () => {
+      swiperContainer.classList.add("open");
+      sealedLetter.style.display = "none";
+
+      swiper = new Swiper(".swiper-container", {
+        direction: "horizontal",
+        rtl: true,
+        loop: false,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        spaceBetween: 10,
+        slidesPerView: 1
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      swiperContainer.classList.remove("open");
+      sealedLetter.style.display = "flex";
+
+      if (swiper) {
+        swiper.destroy(true, true);
+        swiper = null;
+      }
+    });
+  </script>
+</body>
+</html>
